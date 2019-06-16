@@ -1,4 +1,4 @@
-# Notify-Android-Library
+# Notify-Android
 Basic Android library for showing system notifications.
 
 Download
@@ -50,3 +50,7 @@ protected void onCreate(Bundle savedInstanceState) {
         .show(); // Finally showing notification
 }
 ```
+
+License
+--------
+This library is licensed under `MIT license`. View [license](LICENSE).
