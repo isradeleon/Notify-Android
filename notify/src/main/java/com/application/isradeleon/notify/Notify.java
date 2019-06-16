@@ -45,7 +45,7 @@ public class Notify {
         this.largeIcon = applicationInfo.icon;
         this.smallIcon = applicationInfo.icon;
 
-        this.color = Color.BLACK;
+        this.color = -1;
         this.action = null;
         this.vibrationPattern = new long[]{100};
         this.autoCancel = false;
@@ -65,7 +65,7 @@ public class Notify {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
         builder.setAutoCancel(this.autoCancel)
                 .setDefaults(Notification.DEFAULT_SOUND)
-                .setColor(color)
+                .setColor(color == -1 ? Color.BLACK : context.getResources().getColor(color))
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(smallIcon)
                 .setContentTitle(title)

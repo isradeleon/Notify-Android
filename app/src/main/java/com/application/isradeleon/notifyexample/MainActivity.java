@@ -11,6 +11,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Notify.create(this).setColor(R.color.colorAccent).setSmallIcon(R.mipmap.ic_launcher).show();
+
+        /*
+        * Notify usage
+        * */
+        Notify.create(getApplicationContext())
+                .setTitle("Jill")
+                .setContent("Hi! So today at 7 o'clock?")
+                .setColor(R.color.colorPrimary)
+                .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
+                /*
+                * Large icon from URL (INTERNET permission is needed)
+                * */
+                .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
+                /*
+                 * Circle shaped large icon
+                 * */
+                .circleLargeIcon()
+                .show();
     }
 }
