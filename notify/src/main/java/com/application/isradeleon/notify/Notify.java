@@ -247,6 +247,18 @@ public class Notify {
         return id;
     }
 
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public String getChannelDescription() {
+        return channelDescription;
+    }
+
     public static void cancel(@NonNull Context context, int id){
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null)
