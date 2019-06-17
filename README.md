@@ -18,7 +18,7 @@ allprojects {
 Then add the dependency in your app build.gradle:
 ```gradle
 dependencies {
-    implementation 'com.github.Isradeleon:Notify-Android:1.0'
+    implementation 'com.github.Isradeleon:Notify-Android:1.0.1'
 }
 ```
 
