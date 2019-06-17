@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,7 +16,20 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
+import com.application.isradeleon.notify.exceptions.NotifyDefaultChannelInfoNotFoundException;
+import com.application.isradeleon.notify.helpers.BitmapHelper;
+
+import static com.application.isradeleon.notify.helpers.ResourcesHelper.getStringResourceByKey;
+
 public class Notify {
+    public enum NotificationImportance { MIN, LOW, HIGH, MAX }
+    public interface DefaultChannelKeys {
+        String
+            ID = "notify_channel_id",
+            NAME = "notify_channel_name",
+            DESCRIPTION = "notify_channel_description";
+    }
+
     private Context context;
 
     private String channelId;
@@ -33,12 +47,16 @@ public class Notify {
         this.context = _context;
 
         ApplicationInfo applicationInfo = this.context.getApplicationInfo();
-        String packageName = this.context.getPackageName();
 
         this.id = (int) System.currentTimeMillis();
-        this.channelId = "notify_channel_"+packageName;
-        this.channelName = "notify_channel_"+packageName+"_name";
-        this.channelDescription = "Notify channel for package: "+packageName;
+
+        try{
+
+            this.channelId = getStringResourceByKey(context, DefaultChannelKeys.ID);
+            this.channelName = getStringResourceByKey(context, DefaultChannelKeys.NAME);
+            this.channelDescription = getStringResourceByKey(context, DefaultChannelKeys.DESCRIPTION);
+
+        } catch (Resources.NotFoundException e){ throw new NotifyDefaultChannelInfoNotFoundException(); }
 
         this.title = "Notify";
         this.content = "Hello world!";
@@ -47,9 +65,9 @@ public class Notify {
 
         this.color = -1;
         this.action = null;
-        this.vibrationPattern = new long[]{100};
-        this.autoCancel = false;
         this.vibration = true;
+        this.vibrationPattern = new long[]{0, 250, 250, 250};
+        this.autoCancel = false;
         this.circle = false;
         this.setImportanceDefault();
     }
@@ -65,7 +83,6 @@ public class Notify {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
         builder.setAutoCancel(this.autoCancel)
                 .setDefaults(Notification.DEFAULT_SOUND)
-                .setColor(color == -1 ? Color.BLACK : context.getResources().getColor(color))
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(smallIcon)
                 .setContentTitle(title)
@@ -82,13 +99,11 @@ public class Notify {
             builder.setLargeIcon(largeIconBitmap);
         }
 
-        /*if(this.largeIconUrl != null && !this.largeIconUrl.isEmpty()){
-            Bitmap bitmapUrl = BitmapHelper.getCircleBitmapFromUrl(this.largeIconUrl);
+        int realColor;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color, null);
+        else realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color);
 
-            if(bitmapUrl != null) builder.setLargeIcon(bitmapUrl);
-            else builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),applicationInfo.icon));
-
-        }else builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),applicationInfo.icon));*/
+        builder.setColor(realColor);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             /*
@@ -97,8 +112,8 @@ public class Notify {
             NotificationChannel notificationChannel = new NotificationChannel(
                     channelId, channelName, oreoImportance
             );
-            //notificationChannel.enableLights(true);
-            //notificationChannel.setLightColor(Color.BLUE);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(realColor);
             notificationChannel.setDescription(this.channelDescription);
             notificationChannel.setVibrationPattern(this.vibrationPattern);
             notificationChannel.enableVibration(this.vibration);
@@ -108,7 +123,8 @@ public class Notify {
             builder.setPriority(this.importance);
         }
 
-        builder.setVibrate(this.vibrationPattern);
+        if (this.vibration) builder.setVibrate(this.vibrationPattern);
+        else builder.setVibrate(new long[]{0});
 
         if(this.action != null){
             PendingIntent pi = PendingIntent.getActivity(context, id, this.action, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -227,6 +243,10 @@ public class Notify {
         return this;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static void cancel(@NonNull Context context, int id){
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null)
@@ -238,8 +258,6 @@ public class Notify {
         if (notificationManager != null)
             notificationManager.cancelAll();
     }
-
-    public enum NotificationImportance { MIN, LOW, HIGH, MAX }
 }
 
 

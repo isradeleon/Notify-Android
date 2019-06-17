@@ -12,22 +12,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        * Notify usage
-        * */
+        // Example
         Notify.create(getApplicationContext())
+                /*
+                 * Set notification title and content
+                 * */
                 .setTitle("Jill")
                 .setContent("Hi! So today at 7 o'clock?")
-                .setColor(R.color.colorPrimary)
-                .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
                 /*
-                * Large icon from URL (INTERNET permission is needed)
-                * */
+                 * Set notification small icon from drawable resource
+                 * */
+                .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
+                .setColor(R.color.colorPrimary)
+                /*
+                 * Set notification large icon from URL (INTERNET permission is needed)
+                 * */
                 .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
                 /*
                  * Circle shaped large icon
                  * */
                 .circleLargeIcon()
-                .show();
+                .show(); // Finally showing notification
     }
 }

@@ -22,6 +22,18 @@ dependencies {
 
 Usage
 --------
+
+```xml
+<resources>
+    ...
+
+    <string name="notify_channel_id">MyDefaultChannelID</string>
+    <string name="notify_channel_name">MyDefaultChannelName</string>
+    <string name="notify_channel_description">MyDefaultChannelDescription</string>
+
+</resources>
+```
+
 ```java
 // Basic use case:
 @Override
@@ -40,7 +52,8 @@ protected void onCreate(Bundle savedInstanceState) {
         .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
         .setColor(R.color.colorPrimary)
         /*
-        * Set notification large icon from URL (INTERNET permission is needed)
+        * Set notification large icon from URL
+        * INTERNET permission needs to be added in AndroidManifest.xml
         * */
         .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
         /*
