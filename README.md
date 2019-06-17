@@ -22,7 +22,7 @@ dependencies {
 
 Usage
 --------
-
+First you'll need to add the default notification channel info to your app/res/values/strings.xml file (for API >= 26).
 ```xml
 <resources>
     ...
@@ -34,8 +34,8 @@ Usage
 </resources>
 ```
 
+Basic use case:
 ```java
-// Basic use case:
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     ...
@@ -52,8 +52,8 @@ protected void onCreate(Bundle savedInstanceState) {
         .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
         .setColor(R.color.colorPrimary)
         /*
-        * Set notification large icon from URL
-        * INTERNET permission needs to be added in AndroidManifest.xml
+        * Set notification large icon from drawable resource or URL
+        * (INTERNET permission needs to be added in AndroidManifest.xml)
         * */
         .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
         /*

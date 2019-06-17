@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
                 .setColor(R.color.colorPrimary)
                 /*
-                 * Set notification large icon from URL (INTERNET permission is needed)
+                 * Set notification large icon from drawable resource or URL
+                 * (INTERNET permission needs to be added in AndroidManifest.xml)
                  * */
                 .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
                 /*
