@@ -163,7 +163,7 @@ public class Notify {
         return this;
     }
 
-    private Notify setImportance(@NonNull NotificationImportance importance){
+    public Notify setImportance(@NonNull NotificationImportance importance){
         switch (importance){
             case MIN:
                 this.importance = Notification.PRIORITY_MIN;
