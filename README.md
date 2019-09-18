@@ -3,7 +3,8 @@
 [![API](https://img.shields.io/badge/support-API%2019%2B-green)](https://android-arsenal.com/api?level=19#l19)
 [![API](https://img.shields.io/badge/support-API%2028-violet)](https://android-arsenal.com/api?level=28#l19)
 
-Android library that simplifies showing system notifications.
+Android library that simplifies showing system notifications. Use a circle image for the large icon or add
+a big picture to the notification using a single Notify object.
 
 ![preview](capture.jpg)
 
