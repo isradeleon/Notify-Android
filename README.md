@@ -46,33 +46,44 @@ You'll need to add the default notification channel to your app/res/values/strin
 
 Usage
 --------
-Basic use case:
+Basic usage
+
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-    ...
 
     Notify.create(getApplicationContext())
+
         /*
-        * Set notification title and content
-        * */
-        .setTitle("Jill")
-        .setContent("Hi! So today at 7 o'clock?")
+         * Set notification title and content
+         * */
+        .setTitle("Jill Zhao")
+        .setContent("Hi! So I meet you today?")
+
         /*
-        * Set notification small icon from drawable resource
-        * */
+         * Set notification small icon from drawable resource
+         * */
         .setSmallIcon(R.drawable.ic_notifications_none_white_24dp)
         .setColor(R.color.colorPrimary)
+
         /*
-        * Set notification large icon from drawable resource or URL
-        * (INTERNET permission needs to be added in AndroidManifest.xml)
-        * */
+         * Set notification large icon from drawable resource or URL
+         * (INTERNET permission needs to be added to AndroidManifest.xml)
+         * */
         .setLargeIcon("https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=150&w=440")
+
         /*
-        * Circle shaped large icon
-        * */
+         * Circle shaped large icon
+         * */
         .circleLargeIcon()
-        .show(); // Finally showing notification
+
+        /*
+         * Set a big picture from drawable resource or URL
+         * (INTERNET permission needs to be added to AndroidManifest.xml)
+         * */
+        .setBigPicture("https://images.pexels.com/photos/1058683/pexels-photo-1058683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+
+        .show(); // Finally showing the notification
 }
 ```
 

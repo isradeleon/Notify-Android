@@ -34,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
                  * */
                 .circleLargeIcon()
                 /*
-                 * Set big picture
+                 * Set a big picture from drawable resource or URL
+                 * (INTERNET permission needs to be added to AndroidManifest.xml)
                  * */
                 .setBigPicture("https://images.pexels.com/photos/1058683/pexels-photo-1058683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-                .show(); // Finally showing notification
+                .show(); // Finally showing the notification
     }
 }
