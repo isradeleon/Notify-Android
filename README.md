@@ -5,7 +5,7 @@ Android library for easier showing system notifications.
 
 Installation
 --------
-Add jitpack.io in your root build.gradle:
+Add jitpack.io to your root build.gradle:
 ```gradle
 allprojects {
     repositories {
@@ -15,22 +15,23 @@ allprojects {
 }
 ```
 
-Then add the dependency in your app build.gradle:
+Finally add the dependency to your app build.gradle:
 ```gradle
 dependencies {
-    implementation 'com.github.Isradeleon:Notify-Android:1.0.2'
+    implementation 'com.github.isradeleon:Notify-Android:1.0.2'
 }
 ```
 
-Usage
+Notification channel for API >= 26
 --------
-First you'll need to add the default notification channel info to your app/res/values/strings.xml file (for API >= 26).
+You'll need to add the default notification channel to your app/res/values/strings.xml file:
 ```xml
 <resources>
-    ...
 
     <string name="notify_channel_id">MyDefaultChannelID</string>
+
     <string name="notify_channel_name">MyDefaultChannelName</string>
+
     <string name="notify_channel_description">MyDefaultChannelDescription</string>
 
 </resources>
