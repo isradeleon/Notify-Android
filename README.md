@@ -6,8 +6,9 @@
 Android library that simplifies showing system notifications. Use a circle image for the large icon or add
 a big picture to the notification using a single Notify object.
 
-![preview](capture.jpg)
-
+<p align="center">
+    <img src="capture.jpg">
+</p>
 
 Installation
 --------
