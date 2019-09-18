@@ -10,8 +10,8 @@ a big picture to the notification using a single Notify object.
     <img src="capture.jpg">
 </p>
 
-Installation
---------
+## Installation
+
 Add jitpack.io to your root build.gradle:
 ```gradle
 allprojects {
@@ -29,8 +29,8 @@ dependencies {
 }
 ```
 
-Notification channel for API >= 26
---------
+## Notification channel for API >= 26
+
 You'll need to add the default notification channel to your app/res/values/strings.xml file:
 ```xml
 <resources>
@@ -44,9 +44,7 @@ You'll need to add the default notification channel to your app/res/values/strin
 </resources>
 ```
 
-Usage
---------
-Basic usage
+## Basic usage
 
 ```java
 @Override
@@ -87,6 +85,11 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-License
---------
+## Methods
+
+**Notify.create(Context context)**
+Creates a Notify object.
+
+## License
+
 This library is licensed under `MIT license`. View [license](LICENSE).
