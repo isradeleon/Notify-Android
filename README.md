@@ -1,7 +1,7 @@
 # Notify-Android
-[![Release](https://img.shields.io/github/release/Isradeleon/Notify-Android.svg)](https://jitpack.io/#isradeleon/Notify-Android)
+[![Release](https://img.shields.io/github/release/isradeleon/Notify-Android.svg)](https://jitpack.io/#isradeleon/Notify-Android)
 [![API](https://img.shields.io/badge/API-19%2B-green.svg)](https://android-arsenal.com/api?level=19#l19)
-[![API](https://img.shields.io/badge/API-28-blue.svg)](https://android-arsenal.com/api?level=28#l19)
+[![API](https://img.shields.io/badge/API-28-violet.svg)](https://android-arsenal.com/api?level=28#l19)
 
 Android library for easier showing system notifications.
 
