@@ -87,7 +87,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 ## Methods
 
-**Notify.create(Context context)**
+**Notify.create(Context context)** 
 Creates a Notify object.
 
 ## License
