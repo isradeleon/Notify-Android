@@ -101,6 +101,13 @@ protected void onCreate(Bundle savedInstanceState) {
 | **setChannelId(id)** | Sets the notification channel id |
 | **setChannelName(name)** | Sets the notification channel name |
 | **setChannelDescription(description)** | Sets the notification channel description |
+| **setAutoCancel(autoCancel)** | Sets the autocancel value |
+| **enableVibration(vibration)** | Enable or disable the vibration |
+| **setVibrationPattern(vibrationPattern)** | Sets the vibration pattern |
+| **getNotificationBuilder()** | Returns the NotificationCompat.Builder object |
+| **show()** | Shows the notification |
+| **cancel(context, id)** | Cancels the notification specified by id |
+| **cancelAll(context)** | Cancels all the notifications |
 
 ## License
 
