@@ -95,8 +95,12 @@ protected void onCreate(Bundle savedInstanceState) {
 | **setContent(content)** | Sets the notification content |
 | **setImportance(importance)** | Handles the importance with a NotificationImportance object |
 | **setLargeIcon(largeIcon)** | Sets the large icon from a drawable or URL resource |
+| **circleLargeIcon()** | Circular image large icon |
 | **setSmallIcon(smallIcon)** | Sets the small icon from a drawable resource |
 | **setBigPicture(bigPicture)** | Sets a big picture from a drawable or URL resource |
+| **setChannelId(id)** | Sets the notification channel id |
+| **setChannelName(name)** | Sets the notification channel name |
+| **setChannelDescription(description)** | Sets the notification channel description |
 
 ## License
 
