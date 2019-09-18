@@ -5,7 +5,7 @@
 
 Android library that simplifies showing system notifications.
 
-![preview](capture.jpg)
+![preview](capture.jpg =250x)
 
 
 Installation
