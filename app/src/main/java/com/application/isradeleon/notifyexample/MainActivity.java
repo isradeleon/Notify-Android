@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
                 /*
                  * Set notification title and content
                  * */
-                .setTitle("Jill")
-                .setContent("Hi! So today at 7 o'clock?")
+                .setTitle("Jill Zhao")
+                .setContent("Hi! So I meet you today?")
                 /*
                  * Set notification small icon from drawable resource
                  * */
@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
                  * Circle shaped large icon
                  * */
                 .circleLargeIcon()
+                /*
+                 * Set big picture
+                 * */
+                .setBigPicture("https://images.pexels.com/photos/1058683/pexels-photo-1058683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
                 .show(); // Finally showing notification
     }
 }
