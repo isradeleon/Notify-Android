@@ -89,12 +89,14 @@ protected void onCreate(Bundle savedInstanceState) {
 
 | Method | Description |
 |------------------------------------|--------------------------|
-| **Notify.create(Context context)** | Creates a Notify object |
+| **Notify.create(context)** | Creates a Notify object |
 | **setId(id)** | Sets the identifier for the notification |
 | **setTitle(title)** | Sets the notification title |
 | **setContent(content)** | Sets the notification content |
+| **setImportance(importance)** | Handles the importance with a NotificationImportance object |
 | **setLargeIcon(largeIcon)** | Sets the large icon from a drawable or URL resource |
-| **setSmallIcon(smallIcon)** | Sets the large icon from a drawable resource |
+| **setSmallIcon(smallIcon)** | Sets the small icon from a drawable resource |
+| **setBigPicture(bigPicture)** | Sets a big picture from a drawable or URL resource |
 
 ## License
 

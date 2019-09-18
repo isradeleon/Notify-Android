@@ -188,7 +188,7 @@ public class Notify {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             switch (importance){
                 case MIN:
-                        this.oreoImportance = NotificationManager.IMPORTANCE_MIN;
+                    this.oreoImportance = NotificationManager.IMPORTANCE_MIN;
                     break;
 
                 case LOW:
