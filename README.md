@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/support-API%2019%2B-green)](https://android-arsenal.com/api?level=19#l19)
 [![API](https://img.shields.io/badge/support-API%2028-violet)](https://android-arsenal.com/api?level=28#l19)
 
-Android library for easier showing system notifications.
+Android library for easier showing system notifications. 
 
 Installation
 --------
