@@ -20,7 +20,7 @@ allprojects {
 Finally add the dependency to your app build.gradle:
 ```gradle
 dependencies {
-    implementation 'com.github.isradeleon:Notify-Android:1.0.2'
+    implementation 'com.github.isradeleon:Notify-Android:1.0.3'
 }
 ```
 
@@ -39,6 +39,8 @@ You'll need to add the default notification channel to your app/res/values/strin
 </resources>
 ```
 
+Usage
+--------
 Basic use case:
 ```java
 @Override
