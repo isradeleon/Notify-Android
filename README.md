@@ -90,9 +90,9 @@ protected void onCreate(Bundle savedInstanceState) {
 | Method | Description |
 |------------------------------------|--------------------------|
 | **Notify.create(Context context)** | Creates a Notify object |
-| **setTitle()** | Sets the notification title test for long text, lorem ipsum dolor sit amet .... |
-|  |  |
-|  |  |
+| **setTitle** | Sets the notification title |
+| **setContent** | Sets the notification content |
+| **setId(int id)** | Sets the identifier for the notification |
 
 ## License
 
