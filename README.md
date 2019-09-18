@@ -7,7 +7,8 @@ Android library that simplifies showing system notifications. Use a circle image
 a big picture to the notification using a single Notify object.
 
 <p align="center">
-    <img src="capture.jpg">
+    <img src="preview1.jpeg">
+    <img src="preview2.jpeg">
 </p>
 
 ## Installation
