@@ -9,8 +9,8 @@ public class NotifyDefaultChannelInfoNotFoundException extends NotFoundException
     @Override
     public String getMessage() {
         return "One or more of the next values is missing from string resources: " +
-                Notify.DefaultChannelKeys.ID+", " +
-                Notify.DefaultChannelKeys.NAME+" or " +
-                Notify.DefaultChannelKeys.DESCRIPTION;
+                Notify.ChannelData.ID+", " +
+                Notify.ChannelData.NAME+" or " +
+                Notify.ChannelData.DESCRIPTION;
     }
 }

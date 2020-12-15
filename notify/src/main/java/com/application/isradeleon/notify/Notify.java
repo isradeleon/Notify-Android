@@ -16,7 +16,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.application.isradeleon.notify.exceptions.NotifyDefaultChannelInfoNotFoundException;
 import com.application.isradeleon.notify.helpers.BitmapHelper;
 
 import static com.application.isradeleon.notify.helpers.ResourcesHelper.getStringResourceByKey;
@@ -26,8 +25,9 @@ public class Notify {
         return builder;
     }
 
-    public enum NotificationImportance { MIN, LOW, HIGH, MAX }
-    public interface DefaultChannelKeys {
+    public enum NotifyImportance { MIN, LOW, HIGH, MAX }
+
+    public interface ChannelData {
         String
             ID = "notify_channel_id",
             NAME = "notify_channel_name",
@@ -35,50 +35,60 @@ public class Notify {
     }
 
     private Context context;
+    private NotificationCompat.Builder builder;
 
     private String channelId;
     private String channelName;
     private String channelDescription;
 
-    private Object largeIcon, bigPicture;
-    private String title, content;
-    private int id, smallIcon, oreoImportance, importance, color;
-    private Intent action;
-    private long[] vibrationPattern;
-    private boolean autoCancel, vibration, circle;
-    private NotificationCompat.Builder builder;
+    private String title = "Notify",
+            content = "Notification test";
+
+    private int id, smallIcon, oreoImportance, importance, color = -1;
+    private Object largeIcon, picture = null;
+
+    private Intent action = null;
+    private long[] vibrationPattern = new long[]{0, 250, 250, 250};
+
+    private boolean
+            autoCancel = false,
+            vibration = true,
+            circle = false;
 
     private Notify(Context _context){
         this.context = _context;
-
         ApplicationInfo applicationInfo = this.context.getApplicationInfo();
 
+        /*
+        * Default values:
+        * */
         this.id = (int) System.currentTimeMillis();
-
-        try{
-            this.channelId = getStringResourceByKey(context, DefaultChannelKeys.ID);
-            this.channelName = getStringResourceByKey(context, DefaultChannelKeys.NAME);
-            this.channelDescription = getStringResourceByKey(context, DefaultChannelKeys.DESCRIPTION);
-        } catch (Resources.NotFoundException e){ throw new NotifyDefaultChannelInfoNotFoundException(); }
-
-        this.title = "Notify";
-        this.content = "Hello world!";
         this.largeIcon = applicationInfo.icon;
         this.smallIcon = applicationInfo.icon;
-        this.bigPicture = null;
+        this.setDefaultPriority();
+
+        try{
+            this.channelId = getStringResourceByKey(context, ChannelData.ID);
+        } catch (Resources.NotFoundException e){
+            this.channelId = "NotifyAndroid";
+        }
+
+        try {
+            this.channelName = getStringResourceByKey(context, ChannelData.NAME);
+        } catch (Resources.NotFoundException e) {
+            this.channelName = "NotifyAndroidChannel";
+        }
+
+        try{
+            this.channelDescription = getStringResourceByKey(context, ChannelData.DESCRIPTION);
+        } catch (Resources.NotFoundException e) {
+            this.channelDescription = "Default notification android channel";
+        }
 
         builder = new NotificationCompat.Builder(context, channelId);
-
-        this.color = -1;
-        this.action = null;
-        this.vibration = true;
-        this.vibrationPattern = new long[]{0, 250, 250, 250};
-        this.autoCancel = false;
-        this.circle = false;
-        this.setImportanceDefault();
     }
 
-    public static Notify create(@NonNull Context context){ return new Notify(context); }
+    public static Notify build(@NonNull Context context){ return new Notify(context); }
 
     public void show(){
         if (context == null) return;
@@ -94,98 +104,120 @@ public class Notify {
                 .setContentText(content)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content));
 
+        /*
+         * Set large icon
+         * */
         Bitmap largeIconBitmap;
         if (largeIcon instanceof String) largeIconBitmap = BitmapHelper.getBitmapFromUrl(String.valueOf(largeIcon));
         else largeIconBitmap = BitmapHelper.getBitmapFromRes(this.context, (int) largeIcon);
 
+        /*
+         * Circular large icon for chat messages
+         * */
         if (largeIconBitmap != null){
             if (this.circle)
                 largeIconBitmap = BitmapHelper.toCircleBitmap(largeIconBitmap);
             builder.setLargeIcon(largeIconBitmap);
         }
 
-        if(bigPicture != null){
-            Bitmap bigPictureBitmap;
-            if (bigPicture instanceof String) bigPictureBitmap = BitmapHelper.getBitmapFromUrl(String.valueOf(bigPicture));
-            else bigPictureBitmap = BitmapHelper.getBitmapFromRes(this.context, (int) bigPicture);
+        /*
+         * Set notification color
+         * */
+        if(picture != null){
+            Bitmap pictureBitmap;
+            if (picture instanceof String) pictureBitmap = BitmapHelper.getBitmapFromUrl(String.valueOf(picture));
+            else pictureBitmap = BitmapHelper.getBitmapFromRes(this.context, (int) picture);
 
-            if (bigPictureBitmap != null){
-                NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle().bigPicture(bigPictureBitmap).setSummaryText(content);
+            if (pictureBitmap != null){
+                NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle().bigPicture(pictureBitmap).setSummaryText(content);
                 bigPictureStyle.bigLargeIcon(largeIconBitmap);
                 builder.setStyle(bigPictureStyle);
             }
         }
 
+        /*
+        * Set notification color
+        * */
         int realColor;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color, null);
         else realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color);
-
         builder.setColor(realColor);
 
+        /*
+        * Oreo^ notification channels
+        * */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            /*
-            * OREO^ NOTIFICATION CHANNEL
-            * */
             NotificationChannel notificationChannel = new NotificationChannel(
                     channelId, channelName, oreoImportance
             );
+            notificationChannel.setDescription(this.channelDescription);
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(realColor);
-            notificationChannel.setDescription(this.channelDescription);
-            notificationChannel.setVibrationPattern(this.vibrationPattern);
             notificationChannel.enableVibration(this.vibration);
+            notificationChannel.setVibrationPattern(this.vibrationPattern);
 
             notificationManager.createNotificationChannel(notificationChannel);
         }else{
             builder.setPriority(this.importance);
         }
 
+        /*
+        * Set vibration pattern
+        * */
         if (this.vibration) builder.setVibrate(this.vibrationPattern);
         else builder.setVibrate(new long[]{0});
 
+        /*
+        * Action triggered when user clicks noti
+        * */
         if(this.action != null){
             PendingIntent pi = PendingIntent.getActivity(context, id, this.action, PendingIntent.FLAG_CANCEL_CURRENT);
             builder.setContentIntent(pi);
         }
+
+        /*
+        * Show built notification
+        * */
         notificationManager.notify(id, builder.build());
     }
 
     public Notify setTitle(@NonNull String title) {
-        if (!title.trim().isEmpty())
-            this.title = title.trim();
+        if (!title.isEmpty())
+            this.title = title;
         return this;
     }
 
     public Notify setContent(@NonNull String content) {
-        if (!content.trim().isEmpty())
-            this.content = content.trim();
+        if (!content.isEmpty())
+            this.content = content;
         return this;
     }
 
     public Notify setChannelId(@NonNull String channelId) {
-        if (!channelId.trim().isEmpty()){
-            this.channelId = channelId.trim();
+        if (!channelId.isEmpty()){
+            this.channelId = channelId;
             this.builder.setChannelId(channelId);
         }
         return this;
     }
 
     public Notify setChannelName(@NonNull String channelName) {
-        if (!channelName.trim().isEmpty())
-            this.channelName = channelName.trim();
+        if (!channelName.isEmpty())
+            this.channelName = channelName;
         return this;
     }
 
     public Notify setChannelDescription(@NonNull String channelDescription) {
-        if (!channelDescription.trim().isEmpty())
-            this.channelDescription = channelDescription.trim();
+        if (!channelDescription.isEmpty())
+            this.channelDescription = channelDescription;
         return this;
     }
 
-    public Notify setImportance(@NonNull NotificationImportance importance){
+    public Notify setImportance(@NonNull NotifyImportance importance){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             switch (importance){
                 case MIN:
+                    this.importance = Notification.PRIORITY_LOW;
                     this.oreoImportance = NotificationManager.IMPORTANCE_MIN;
                     break;
 
@@ -208,11 +240,10 @@ public class Notify {
         return this;
     }
 
-    private void setImportanceDefault(){
+    private void setDefaultPriority(){
         this.importance = Notification.PRIORITY_DEFAULT;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             this.oreoImportance = NotificationManager.IMPORTANCE_DEFAULT;
-        }
     }
 
     public Notify enableVibration(boolean vibration) {
@@ -225,7 +256,7 @@ public class Notify {
         return this;
     }
 
-    public Notify circleLargeIcon() {
+    public Notify largeCircularIcon() {
         this.circle = true;
         return this;
     }
@@ -255,13 +286,13 @@ public class Notify {
         return this;
     }
 
-    public Notify setBigPicture(@DrawableRes int bigPicture) {
-        this.bigPicture = bigPicture;
+    public Notify setPicture(@DrawableRes int bigPicture) {
+        this.picture = bigPicture;
         return this;
     }
 
-    public Notify setBigPicture(@NonNull String bigPictureUrl) {
-        this.bigPicture = bigPictureUrl;
+    public Notify setPicture(@NonNull String bigPictureUrl) {
+        this.picture = bigPictureUrl;
         return this;
     }
 
