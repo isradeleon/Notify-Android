@@ -11,10 +11,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.v4.app.NotificationCompat;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 
 import com.application.isradeleon.notify.exceptions.NotifyDefaultChannelInfoNotFoundException;
 import com.application.isradeleon.notify.helpers.BitmapHelper;
@@ -56,11 +56,9 @@ public class Notify {
         this.id = (int) System.currentTimeMillis();
 
         try{
-
             this.channelId = getStringResourceByKey(context, DefaultChannelKeys.ID);
             this.channelName = getStringResourceByKey(context, DefaultChannelKeys.NAME);
             this.channelDescription = getStringResourceByKey(context, DefaultChannelKeys.DESCRIPTION);
-
         } catch (Resources.NotFoundException e){ throw new NotifyDefaultChannelInfoNotFoundException(); }
 
         this.title = "Notify";

@@ -1,6 +1,6 @@
 package com.application.isradeleon.notifyexample;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.application.isradeleon.notify.Notify;
