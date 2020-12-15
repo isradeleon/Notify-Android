@@ -90,26 +90,26 @@ protected void onCreate(Bundle savedInstanceState) {
 
 | Method | Description |
 |------------------------------------|--------------------------|
-| **Notify.build(context)** | Creates a Notify object |
-| **setId(id)** | Sets the identifier for the notification |
-| **setTitle(title)** | Sets the notification title |
-| **setContent(content)** | Sets the notification content |
-| **setImportance(importance)** | Handles the importance with NotifyImportance |
-| **setLargeIcon(largeIcon)** | Sets the large icon from a drawable or URL resource |
-| **largeCircularIcon()** | Makes large icon circular |
-| **setSmallIcon(smallIcon)** | Sets the small icon from a drawable resource |
-| **setPicture(picture)** | Sets a picture from a drawable or URL resource |
-| **setChannelId(id)** | Sets the notification channel id |
-| **setChannelName(name)** | Sets the notification channel name |
-| **setChannelDescription(description)** | Sets the notification channel description |
-| **setAutoCancel(autoCancel)** | Sets the auto-cancel value |
-| **setAction(intent)** | Sets the action for when user clicks the notification  |
+| **Notify.build(context)** | Create a Notify object |
+| **setId(id)** | Set the identifier for the notification |
+| **setTitle(title)** | Set the notification title |
+| **setContent(content)** | Set the notification content |
+| **setImportance(importance)** | Handle the importance with NotifyImportance |
+| **setLargeIcon(largeIcon)** | Set the large icon from a drawable or URL resource |
+| **largeCircularIcon()** | Make large icon circular |
+| **setSmallIcon(smallIcon)** | Set the small icon from a drawable resource |
+| **setPicture(picture)** | Set a picture from a drawable or URL resource |
+| **setChannelId(id)** | Set the notification channel id |
+| **setChannelName(name)** | Set the notification channel name |
+| **setChannelDescription(description)** | Set the notification channel description |
+| **setAutoCancel(autoCancel)** | Set the auto-cancel value |
+| **setAction(intent)** | Set the action for when user clicks the notification  |
 | **enableVibration(vibration)** | Enable or disable the vibration |
-| **setVibrationPattern(vibrationPattern)** | Sets the vibration pattern |
-| **getNotificationBuilder()** | Returns the NotificationCompat.Builder object |
-| **show()** | Shows the notification |
-| **cancel(context, id)** | Cancels the notification specified by id |
-| **cancelAll(context)** | Cancels all the notifications |
+| **setVibrationPattern(vibrationPattern)** | Set the vibration pattern |
+| **getNotificationBuilder()** | Return the native NotificationCompat.Builder object |
+| **show()** | Show the notification |
+| **cancel(context, id)** | Cancel the specified notification by id |
+| **cancelAll(context)** | Cancel all notifications |
 
 ## License
 
