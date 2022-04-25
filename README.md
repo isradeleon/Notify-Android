@@ -3,8 +3,7 @@
 [![API](https://img.shields.io/badge/support-API%2019%2B-yellow)](https://android-arsenal.com/api?level=19#l19)
 [![API](https://img.shields.io/badge/support-API%2026%2B-green)](https://android-arsenal.com/api?level=28#l19)
 
-Android library that simplifies system notifications. Use a circle image for large icon or add
-a picture to show in the notification using the Notify class.
+Android library that simplifies creating & showing app notifications. Change the notification's icon or add a circular image or a picture to the notification using the Notify class.
 
 <p align="center">
     <img src="preview1.jpeg">
