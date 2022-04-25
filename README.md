@@ -26,7 +26,7 @@ allprojects {
 Include the dependency in your app build.gradle:
 ```gradle
 dependencies {
-    implementation 'com.github.isradeleon:Notify-Android:1.0.4' // updated for Android X
+    implementation 'com.github.isradeleon:Notify-Android:1.0.5' // updated for Android X
 }
 ```
 
