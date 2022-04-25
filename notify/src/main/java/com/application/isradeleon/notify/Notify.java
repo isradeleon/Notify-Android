@@ -47,8 +47,7 @@ public class Notify {
     private String channelName;
     private String channelDescription;
 
-    private String title = "Notify",
-            content = "Notification test";
+    private CharSequence title = "", content = "";
 
     private int id, smallIcon, oreoImportance, importance, color = -1;
     private Object largeIcon, picture = null;
@@ -193,15 +192,13 @@ public class Notify {
         notificationManager.notify(id, builder.build());
     }
 
-    public Notify setTitle(@NonNull String title) {
-        if (!title.isEmpty())
-            this.title = title;
+    public Notify setTitle(@NonNull CharSequence title) {
+        this.title = title;
         return this;
     }
 
-    public Notify setContent(@NonNull String content) {
-        if (!content.isEmpty())
-            this.content = content;
+    public Notify setContent(@NonNull CharSequence content) {
+        this.content = content;
         return this;
     }
 
@@ -298,13 +295,13 @@ public class Notify {
         return this;
     }
 
-    public Notify setPicture(@DrawableRes int bigPicture) {
-        this.picture = bigPicture;
+    public Notify setPicture(@DrawableRes int pictureRes) {
+        this.picture = pictureRes;
         return this;
     }
 
-    public Notify setPicture(@NonNull String bigPictureUrl) {
-        this.picture = bigPictureUrl;
+    public Notify setPicture(@NonNull String pictureUrl) {
+        this.picture = pictureUrl;
         return this;
     }
 
