@@ -1,5 +1,11 @@
 package com.application.isradeleon.notify;
 
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.M;
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -90,6 +96,7 @@ public class Notify {
 
     public static Notify build(@NonNull Context context){ return new Notify(context); }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public void show(){
         if (context == null) return;
 
@@ -139,14 +146,14 @@ public class Notify {
         * Set notification color
         * */
         int realColor;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color, null);
+        if (SDK_INT >= M) realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color, null);
         else realColor = color == -1 ? Color.BLACK : context.getResources().getColor(color);
         builder.setColor(realColor);
 
         /*
         * Oreo^ notification channels
         * */
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     channelId, channelName, oreoImportance
             );
@@ -171,7 +178,12 @@ public class Notify {
         * Action triggered when user clicks noti
         * */
         if(this.action != null){
-            PendingIntent pi = PendingIntent.getActivity(context, id, this.action, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent pi;
+            if (SDK_INT >= M)
+                pi = PendingIntent.getActivity(context, id, this.action,
+                        FLAG_CANCEL_CURRENT | FLAG_IMMUTABLE);
+            else pi = PendingIntent.getActivity(context, id,
+                    this.action, FLAG_CANCEL_CURRENT);
             builder.setContentIntent(pi);
         }
 
@@ -214,7 +226,7 @@ public class Notify {
     }
 
     public Notify setImportance(@NonNull NotifyImportance importance){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (SDK_INT >= Build.VERSION_CODES.N) {
             switch (importance){
                 case MIN:
                     this.importance = Notification.PRIORITY_LOW;
@@ -242,7 +254,7 @@ public class Notify {
 
     private void setDefaultPriority(){
         this.importance = Notification.PRIORITY_DEFAULT;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        if (SDK_INT >= Build.VERSION_CODES.N)
             this.oreoImportance = NotificationManager.IMPORTANCE_DEFAULT;
     }
 
